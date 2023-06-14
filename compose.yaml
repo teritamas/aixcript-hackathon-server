@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  innosupo-api:
+    build: .
+    container_name: aixcript-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./key:/key
+      - .env:/.env
