@@ -1,6 +1,4 @@
-import io
 import json
-import zipfile
 from fastapi.testclient import TestClient
 from app.master.dataset.models.entry_dataset import (
     EntryDatasetResponse,
@@ -33,3 +31,12 @@ def test_entry_dataset_endpoint():
 
     response_model = EntryDatasetResponse(**response_data)
     assert response_model.dataset_id == response_data["dataset_id"]
+
+
+def test_list_dataset():
+    test_entry_dataset_endpoint()
+    response = client.get("/dataset")
+    assert response.status_code == 200
+    datasets = response.json()["datasets"]
+    assert isinstance(datasets, list)
+    assert len(datasets) >= 1
