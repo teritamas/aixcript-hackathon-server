@@ -9,7 +9,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
 # pythonライブラリをインストール
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --upgrade pip &&\
-  pip install -r requirements.txt &&\
+  pip install -r requirements.txt --require-hashes --no-deps &&\
   rm -rf ~/.cache/pip
 
 RUN apt-get update \
