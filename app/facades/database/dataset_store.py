@@ -22,3 +22,13 @@ def find_datasets() -> List[Dataset]:
     """
     datasets = fire_store().collection(COLLECTION_PREFIX).stream()
     return [Dataset.parse_obj(dataset.to_dict()) for dataset in datasets]
+
+
+def fetch_dataset(id: str) -> Dataset:
+    """データセットを取得する
+
+    Returns:
+        Dataset: データセット
+    """
+    dataset = fire_store.fetch(collection=COLLECTION_PREFIX, id=id)
+    return Dataset.parse_obj(dataset)
