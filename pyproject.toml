@@ -18,6 +18,7 @@ firebase-admin = "^6.1.0"
 black = "^23.3.0"
 pytest = "^7.3.2"
 httpx = "^0.24.1"
+pytest-mock = "^3.10.0"
 
 [build-system]
 requires = ["poetry-core"]

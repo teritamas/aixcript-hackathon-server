@@ -5,8 +5,16 @@ from app.master.dataset.models.entry_dataset import (
     EntryDatasetResponse,
 )
 from app.master.dataset.models.list_dataset import ListDatasetResponse
+from app.master.dataset.models.purchase_dataset import (
+    PurchaseDatasetRequest,
+    PurchasedDatasetResponse,
+)
 
-from app.master.dataset.services import entry_dataset_service, list_dataset_service
+from app.master.dataset.services import (
+    entry_dataset_service,
+    list_dataset_service,
+    purchase_dataset_service,
+)
 
 
 dataset_router = APIRouter(prefix="/dataset", tags=["dataset"])
@@ -34,3 +42,19 @@ async def entry_dataset(
 async def list_dataset():
     datasets = await list_dataset_service.execute()
     return ListDatasetResponse(datasets=datasets)
+
+
+@dataset_router.post(
+    "/{dataset_id}/purchased",
+    description="データセット購入API.",
+    response_model=PurchasedDatasetResponse,
+)
+async def purchase_dataset(
+    dataset_id: str,
+    request: PurchaseDatasetRequest,
+):
+    dataset_id = await purchase_dataset_service.execute(
+        dataset_id=dataset_id,
+        request=request,
+    )
+    return PurchasedDatasetResponse(dataset_id=dataset_id)
