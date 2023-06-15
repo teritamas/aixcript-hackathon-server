@@ -1,3 +1,4 @@
+from typing import List
 from app.facades.database import fire_store
 from app.master.dataset.models.domain import Dataset
 
@@ -11,3 +12,13 @@ def add_dataset(id: str, content: Dataset):
         content (dataset): 追加するデータセット
     """
     fire_store.add(collection=COLLECTION_PREFIX, id=id, content=content.dict())
+
+
+def find_datasets() -> List[Dataset]:
+    """データセットを全件取得する
+
+    Returns:
+        List[Dataset]: データセット一覧
+    """
+    datasets = fire_store().collection(COLLECTION_PREFIX).stream()
+    return [Dataset.parse_obj(dataset.to_dict()) for dataset in datasets]
