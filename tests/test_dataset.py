@@ -30,7 +30,7 @@ def test_entry_dataset_endpoint(mocker):
                 None,
                 json.dumps(request_payload),
             ),
-            "file": open("./tests/assets/sample_1.zip", "rb"),
+            "file": open("./tests/assets/sample_1.jpeg", "rb"),
         },
     )
 

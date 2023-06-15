@@ -10,6 +10,8 @@ class Dataset(BaseModel):
     user_id: str = Field("", description="所有者のユーザID")
     description: str = Field("", description="データセットの詳細")
 
+    file_name: str = Field("", description="ファイル名")
+
     price: int = Field(0, description="価格")
     tags: list = Field([], description="タグ")
 
