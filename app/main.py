@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .utils.logging import logger
+from app.master.dataset.dataset_router import dataset_router
 
 
 def get_application() -> FastAPI:
@@ -10,8 +11,7 @@ def get_application() -> FastAPI:
     app = FastAPI(
         title="AI Cript Hackathon",
         description="AI Cript Hackathon APIです",
-        prefix="/api/v1"
-        # version=env_settings.version,
+        prefix="/api/v1",
     )
 
     app.add_middleware(
@@ -22,6 +22,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
 
+    app.include_router(dataset_router)
     return app
 
 

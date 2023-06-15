@@ -12,10 +12,34 @@ fastapi = "^0.97.0"
 uvicorn = "^0.22.0"
 python-multipart = "^0.0.6"
 python-dotenv = "^1.0.0"
+firebase-admin = "^6.1.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
+pytest = "^7.3.2"
+httpx = "^0.24.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+# 改行文字を設定
+force-quotes = true
+single-quotes = false
