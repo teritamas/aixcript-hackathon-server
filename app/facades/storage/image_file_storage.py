@@ -5,7 +5,7 @@ from PIL import Image
 import os
 
 FOLDER_NAME = "ZipFile"
-TEMP_FOLDER_NAME = "./temp/thumbnail"
+TEMP_FOLDER_NAME = "./app/temp/thumbnail"
 
 
 def upload(

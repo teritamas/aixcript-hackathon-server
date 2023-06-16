@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .utils.logging import logger
 from app.master.dataset.dataset_router import dataset_router
 from app.master.user.user_router import user_router
+from app.master.download.download_router import download_router
 
 
 def get_application() -> FastAPI:
@@ -25,6 +26,7 @@ def get_application() -> FastAPI:
 
     app.include_router(dataset_router)
     app.include_router(user_router)
+    app.include_router(download_router)
     return app
 
 

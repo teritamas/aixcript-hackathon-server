@@ -58,7 +58,7 @@ def fetch_user_from_wallet_address(wallet_address: str) -> List[User]:
         .stream()
     )
 
-    return [User.parse_obj(user.to_dict()) for user in users]
+    return [User.parse_obj(user.to_dict()) for user in users][0]
 
 
 def delete_user(id: str):

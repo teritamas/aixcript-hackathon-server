@@ -60,9 +60,9 @@ async def list_dataset():
 
 @dataset_router.get(
     "/{dataset_id}/thumbnail",
-    description="画像取得API",
+    description="サムネイル取得API",
     response_class=FileResponse,
-    response_description="提案のサムネイル",
+    response_description="データセットのサムネイル",
 )
 def download_proposal_thumbnail(
     dataset_id: str,
