@@ -16,6 +16,7 @@ async def execute(file: File):
             "is_registerable": False
             if len(web_detection_dto.full_math_url) > 0
             else True,
+            "tags": web_detection_dto.best_guess_labels.split(" "),
         }
     )
 

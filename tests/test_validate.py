@@ -18,4 +18,5 @@ def test_validate_endpoint():
     assert 5 == len(response_json["full_math_url"])
     assert 0 == len(response_json["partial_math_urls"])
     assert 5 == len(response_json["similar_urls"])
+    assert 2 == len(response_json["tags"])
     assert not response_json["is_registerable"]
