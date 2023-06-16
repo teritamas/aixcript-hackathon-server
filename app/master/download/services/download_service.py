@@ -1,4 +1,5 @@
 import os
+from typing import List
 from zipfile import ZIP_DEFLATED, ZipFile
 from app.facades.database import user_store
 from app.facades.storage import image_file_storage
@@ -17,11 +18,12 @@ async def execute(
     Args:
         wallet_address (str): _description_
     """
-    user: User = user_store.fetch_user_from_wallet_address(wallet_address)
+    users: List[User] = user_store.fetch_user_from_wallet_address(wallet_address)
 
-    if not user:
+    if len(users) != 1:
         logger.error(f"User not found. wallet_address: {wallet_address}")
         return None
+    user = users[0]
 
     uuid = generate_id_str()
     zipfile_name = f"{uuid}.zip"
