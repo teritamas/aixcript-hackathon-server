@@ -1,3 +1,4 @@
+from typing import List
 from app.facades.database import fire_store
 from app.master.dataset.models.domain import Dataset
 from app.master.user.models.domain import User
@@ -39,3 +40,26 @@ def purchased_dataset(user_id: str, dataset: Dataset):
     user.purchase_datasets.append(dataset)
 
     fire_store.add(collection=COLLECTION_PREFIX, id=user_id, content=user.dict())
+
+
+def fetch_user_from_wallet_address(wallet_address: str) -> List[User]:
+    """WalletAddressからユーザを検索する。
+
+    Args:
+        wallet_address (str): 検索対象のWalletアドレス
+
+    Returns:
+        List[User]: 検索で見つかったユーザの一覧（Walletアドレスはユニークなので、基本的に配列サイズは 0 or 1）
+    """
+    users = (
+        fire_store()
+        .collection(COLLECTION_PREFIX)
+        .where("wallet_address", "==", wallet_address)
+        .stream()
+    )
+
+    return [User.parse_obj(user.to_dict()) for user in users]
+
+
+def delete_user(id: str):
+    fire_store.delete(collection=COLLECTION_PREFIX, id=id)
