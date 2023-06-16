@@ -6,7 +6,6 @@ from app.master.dataset.models.entry_dataset import (
 from app.main import app
 from app.master.dataset.models.purchase_dataset import (
     PurchaseDatasetRequest,
-    PurchasedDatasetResponse,
 )
 
 client = TestClient(app)
@@ -43,8 +42,8 @@ def test_entry_dataset_endpoint(mocker):
     assert response_model.dataset_id == response_data["dataset_id"]
 
 
-def test_list_dataset():
-    test_entry_dataset_endpoint()
+def test_list_dataset(mocker):
+    test_entry_dataset_endpoint(mocker)
 
     # Make a request to the endpoint with the sample payload
     response = client.get("/dataset")
