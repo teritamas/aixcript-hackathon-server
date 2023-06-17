@@ -25,10 +25,14 @@ async def execute(
 
     image_file_storage.upload(file_name, image)
 
+    # TODO: ChatGPTに生成されたタイトルを入れる
+    title = "title"
+
     # firestoreにデータを格納
     content = Dataset.parse_obj(
         {
             **request.dict(),
+            "title": title,
             "dataset_id": dataset_id,
             "file_name": file_name,
         }

@@ -7,7 +7,10 @@ from app.utils.common import now
 
 
 class Dataset(BaseModel):
+    dataset_id: str = Field("", description="データセットID")
     user_id: str = Field("", description="所有者のユーザID")
+
+    title: str = Field("", description="データセットのタイトル(自動生成される)")
     description: str = Field("", description="データセットの詳細")
 
     file_name: str = Field("", description="ファイル名")
