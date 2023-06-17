@@ -20,7 +20,7 @@ def execute(content: str) -> CreateChatTitle:
             content="""
 次のフォーマットで値を抽出せよ。
 {
-  "title": 文章を15文字以下で要約したタイトル,
+  "title": 文章を15文字以下で要約したタイトルで、タイトルは必ず日本語で返す,
   "tags": 文章から生成したタグのリスト,[tag, tag, tag]の形式,タグは英語で返す
 }
 キーは必ず含ませる。
