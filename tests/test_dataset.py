@@ -69,7 +69,7 @@ def test_list_dataset_purchased(mocker):
 
 
 def test_purchase_dataset(mocker):
-    test_entry_dataset_endpoint(mocker)
+    # test_entry_dataset_endpoint(mocker)
 
     test_dataset_id = "12345"
     request = PurchaseDatasetRequest(

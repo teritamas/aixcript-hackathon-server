@@ -2,12 +2,13 @@ import io
 from fastapi import BackgroundTasks, UploadFile
 from app.facades.chatgpt import create_title
 from app.facades.chatgpt.models import CreateChatTitle
-from app.facades.database import dataset_store
+from app.facades.database import dataset_store, user_store
 from app.facades.storage import image_file_storage
 from app.master.dataset.models.domain import Dataset
 from PIL import Image
 
 from app.master.dataset.models.entry_dataset import EntryDatasetRequest
+from app.master.user.models.domain import UserDataset
 from app.utils.common import generate_id_str
 
 
@@ -43,5 +44,9 @@ async def execute(
     )
 
     dataset_store.add_dataset(dataset_id, content)
+
+    # ユーザのデータセット一覧に追加
+    user_dataset = UserDataset.parse_obj(content.dict())
+    user_store.sell_dataset(request.user_id, user_dataset)
 
     return dataset_id
