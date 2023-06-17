@@ -8,7 +8,7 @@ from app.utils.common import now
 
 class Dataset(BaseModel):
     dataset_id: str = Field("", description="データセットID")
-    user_id: str = Field("", description="所有者のユーザID")
+    user_id: str = Field("", description="作成者のユーザID")
 
     title: str = Field("", description="データセットのタイトル(自動生成される)")
     description: str = Field("", description="データセットの詳細")
