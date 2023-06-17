@@ -13,6 +13,8 @@ async def execute(
     if not user or not dataset:
         return "ユーザーまたはデータセットが存在しません"
 
+    # TODO: 冗長ではあるが両方にデータを入れる
     user_store.purchased_dataset(user.user_id, dataset)
+    dataset_store.purchased_user(dataset.dataset_id, user)
 
     return dataset_id

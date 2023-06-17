@@ -18,7 +18,7 @@ class Dataset(BaseModel):
     price: int = Field(0, description="価格")
     tags: list = Field([], description="タグ")
 
-    purchased_users: List[str] = Field([], description="購入したユーザ一覧")
+    purchased_users: List[str] = Field([], description="購入したユーザのユーザID一覧")
 
     created_at: datetime = Field(now(), description="作成時刻")
     updated_at: datetime = Field(now(), description="編集時刻")
