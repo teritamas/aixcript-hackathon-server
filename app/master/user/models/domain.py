@@ -8,6 +8,7 @@ from app.master.dataset.models.domain import Dataset
 class User(BaseModel):
     # id
     user_id: str = Field("", description="ユーザID")
+    user_name: str = Field("", description="ユーザ名")
     # ウォレットアドレス
     wallet_address: str = Field("", description="ウォレットアドレス")
 
