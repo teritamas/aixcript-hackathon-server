@@ -4,6 +4,8 @@ from app.facades.chatgpt import create_title
 from app.facades.chatgpt.models import CreateChatTitle
 from app.facades.database import dataset_store, user_store
 from app.facades.storage import image_file_storage
+from app.facades.vision_ai import web_detection
+from app.facades.vision_ai.models import WebDetectionDto
 from app.master.dataset.models.domain import Dataset
 from PIL import Image
 
@@ -29,8 +31,9 @@ async def execute(
     image_file_storage.upload(file_name, image)
 
     # ChatGPTに生成されたタイトルを入れる
+    web_detection_dto: WebDetectionDto = web_detection.execute(image_file)
     create_chat_title: CreateChatTitle = create_title.execute(
-        f"{request.description}. "
+        f"概要: {request.description}. AIによって画像から検出されたタグ: {web_detection_dto.best_guess_labels}"
     )
 
     # firestoreにデータを格納
