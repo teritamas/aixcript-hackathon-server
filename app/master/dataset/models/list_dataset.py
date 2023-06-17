@@ -13,7 +13,9 @@ class DatasetOwnType(str, Enum):
 
 
 class ListDatasetDto(Dataset):
-    dataset_own_type: DatasetOwnType = Field(DatasetOwnType)
+    dataset_own_type: DatasetOwnType = Field(
+        DatasetOwnType.UNKNOWN, description="データセットの所有者"
+    )
 
 
 class ListDatasetResponse(BaseModel):
