@@ -8,7 +8,7 @@ from app.facades.chatgpt.models import CreateChatTitle
 from app.facades.chatgpt import chatOpenAi, _convert_json
 
 
-def create_report_title(content: str) -> CreateChatTitle:
+def execute(content: str) -> CreateChatTitle:
     if content == "":
         logger.warn("content is empty")
         return CreateChatTitle(
@@ -21,6 +21,7 @@ def create_report_title(content: str) -> CreateChatTitle:
 次のフォーマットで値を抽出せよ。
 {
   "title": 文章を15文字以下で要約したタイトル,
+  "tags": 文章から生成したタグのリスト,[tag, tag, tag]の形式,タグは英語で返す
 }
 キーは必ず含ませる。
 JSON以外の情報は削除する。

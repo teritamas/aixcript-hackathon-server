@@ -19,7 +19,7 @@ def test_entry_dataset_endpoint(mocker):
         return_value=test_dataset_id,
     )
 
-    request_payload = {"user_id": "sample_user_id", "description": "sample name"}
+    request_payload = {"user_id": "sample_user_id", "description": "日本の果てで撮影した画像です。"}
 
     # Make a request to the endpoint with the sample payload
     response = client.post(
