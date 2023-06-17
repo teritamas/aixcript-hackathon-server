@@ -17,12 +17,12 @@ def execute(content: str) -> CreateChatTitle:
 
     report_title_prompt = [
         SystemMessage(
-            content="""
-次のフォーマットで値を抽出せよ。
+            content="""「概要」と「AIによって画像から検出されたタグ」を利用して、次のフォーマットで値を抽出せよ。
 {
-  "title": 文章を15文字以下で要約したタイトルで、タイトルは必ず日本語で返す,
+  "title": 文章を15文字以下で要約したタイトルで、必ず日本語で返す,
   "tags": 文章から生成したタグのリスト,[tag, tag, tag]の形式,タグは英語で返す
 }
+titleには、「AIによって画像から検出されたタグ」のうち、1つ以上を必ず含ませる
 キーは必ず含ませる。
 JSON以外の情報は削除する。
 
