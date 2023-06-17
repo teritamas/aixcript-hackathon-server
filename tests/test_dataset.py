@@ -73,6 +73,19 @@ def test_list_dataset_purchased(mocker):
 
 
 def test_purchase_dataset(mocker):
+    test_entry_dataset_endpoint(mocker)
+
+    # Make a request to the endpoint with the sample payload
+    response = client.get("/dataset?user_id=sample_user_id")
+
+    # then
+    assert response.status_code == 200
+    datasets = response.json()["datasets"]
+    assert isinstance(datasets, list)
+    assert len(datasets) >= 1
+
+
+def test_purchase_dataset(mocker):
     # test_entry_dataset_endpoint(mocker)
 
     test_dataset_id = "12345"
