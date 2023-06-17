@@ -9,6 +9,7 @@ class EntryDatasetResponse(BaseModel):
 class EntryDatasetRequest(BaseModel):
     user_id: str = Field("", description="ユーザID")
     description: str = Field("", description="データセットの詳細")
+    price: int = Field(10, description="価格")
 
     @classmethod
     def __get_validators__(cls):
