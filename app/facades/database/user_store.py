@@ -1,7 +1,7 @@
 from typing import List
 from app.facades.database import fire_store
 from app.master.dataset.models.domain import Dataset
-from app.master.user.models.domain import User
+from app.master.user.models.domain import User, UserDataset
 
 
 COLLECTION_PREFIX = "users"
@@ -30,14 +30,26 @@ def fetch_user(id: str) -> User | None:
     return User.parse_obj(user_dict) if user_dict else None
 
 
-def purchased_dataset(user_id: str, dataset: Dataset):
+def purchased_dataset(user_id: str, user_dataset: UserDataset):
     """ユーザがデータセットを購入する
 
     Args:
         dataset (Dataset): 購入するデータセット
     """
     user = fetch_user(user_id)
-    user.purchase_datasets.append(dataset)
+    user.purchase_datasets.append(user_dataset)
+
+    fire_store.add(collection=COLLECTION_PREFIX, id=user_id, content=user.dict())
+
+
+def sell_dataset(user_id: str, user_dataset: UserDataset):
+    """ユーザがデータセットを販売する
+
+    Args:
+        user_dataset (UserDataset): 販売するデータセット
+    """
+    user = fetch_user(user_id)
+    user.sell_datasets.append(user_dataset)
 
     fire_store.add(collection=COLLECTION_PREFIX, id=user_id, content=user.dict())
 
