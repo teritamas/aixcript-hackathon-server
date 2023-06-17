@@ -16,6 +16,8 @@ firebase-admin = "^6.1.0"
 pillow = "^9.5.0"
 google-cloud-vision = "^3.4.2"
 google-auth = "^2.20.0"
+openai = "^0.27.8"
+langchain = "^0.0.202"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

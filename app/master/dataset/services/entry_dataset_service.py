@@ -1,5 +1,7 @@
 import io
 from fastapi import BackgroundTasks, UploadFile
+from app.facades.chatgpt import create_title
+from app.facades.chatgpt.models import CreateChatTitle
 from app.facades.database import dataset_store
 from app.facades.storage import image_file_storage
 from app.master.dataset.models.domain import Dataset
@@ -25,14 +27,16 @@ async def execute(
 
     image_file_storage.upload(file_name, image)
 
-    # TODO: ChatGPTに生成されたタイトルを入れる
-    title = "title"
+    # ChatGPTに生成されたタイトルを入れる
+    create_chat_title: CreateChatTitle = create_title.execute(
+        f"{request.description}. "
+    )
 
     # firestoreにデータを格納
     content = Dataset.parse_obj(
         {
             **request.dict(),
-            "title": title,
+            **create_chat_title.dict(),
             "dataset_id": dataset_id,
             "file_name": file_name,
         }
