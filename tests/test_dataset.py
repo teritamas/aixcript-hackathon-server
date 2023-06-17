@@ -19,7 +19,7 @@ def test_entry_dataset_endpoint(mocker):
         return_value=test_dataset_id,
     )
 
-    request_payload = {"user_id": "sample data", "description": "sample name"}
+    request_payload = {"user_id": "sample_user_id", "description": "日本の果てで撮影した画像です。"}
 
     # Make a request to the endpoint with the sample payload
     response = client.post(
@@ -47,6 +47,19 @@ def test_list_dataset(mocker):
 
     # Make a request to the endpoint with the sample payload
     response = client.get("/dataset")
+
+    # then
+    assert response.status_code == 200
+    datasets = response.json()["datasets"]
+    assert isinstance(datasets, list)
+    assert len(datasets) >= 1
+
+
+def test_list_dataset_purchased(mocker):
+    test_entry_dataset_endpoint(mocker)
+
+    # Make a request to the endpoint with the sample payload
+    response = client.get("/dataset?user_id=sample_user_id")
 
     # then
     assert response.status_code == 200

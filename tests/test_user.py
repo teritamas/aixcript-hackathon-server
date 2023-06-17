@@ -51,8 +51,23 @@ def test_signup_exists(mocker):
     assert response.json() == {"user_id": f"{sample_user_id}"}
 
 
+def test_fetch_user(mocker):
+    test_signup_not_exists(mocker)
+    # give
+    sample_user_id = "sample_user_id"
+
+    response = client.get(
+        f"/user/{sample_user_id}",
+    )
+
+    assert response.status_code == 200
+    actual_user = User.parse_obj(response.json())
+    assert actual_user.user_id == sample_user_id
+    assert actual_user.user_name == "test_user"
+    assert actual_user.purchase_datasets == []
+
+
 def test_login_wallet_address(mocker):
-    # test_signup_not_exists(mocker)
     # give
     sample_user_id = "sample_user_id"
     test_wallet_address = "0xb872960EF2cBDecFdC64115E1C77067c16f042FB"
@@ -64,4 +79,5 @@ def test_login_wallet_address(mocker):
     assert response.status_code == 200
     actual_user = User.parse_obj(response.json())
     assert actual_user.user_id == sample_user_id
+    assert actual_user.user_name == "test_user"
     assert actual_user.wallet_address == test_wallet_address

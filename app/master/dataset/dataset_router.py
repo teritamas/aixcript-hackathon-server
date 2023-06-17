@@ -53,8 +53,10 @@ async def entry_dataset(
 @dataset_router.get(
     "", description="データセット一覧取得API.", response_model=ListDatasetResponse
 )
-async def list_dataset():
-    datasets = await list_dataset_service.execute()
+async def list_dataset(
+    user_id: str | None = None,
+):
+    datasets = await list_dataset_service.execute(user_id=user_id)
     return ListDatasetResponse(datasets=datasets)
 
 

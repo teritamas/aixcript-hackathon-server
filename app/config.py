@@ -10,3 +10,6 @@ if cred_path == "":
     exit()
 
 google_cloud_storage_bucket_name = environ.get("GOOGLE_CLOUD_STORAGE_BUCKET", "")
+
+# OpenAIのAPIキー
+openai_api_key = environ.get("OPENAI_API_KEY", "")
