@@ -1,5 +1,6 @@
 from fastapi import (
     APIRouter,
+    BackgroundTasks,
     HTTPException,
     status,
 )
@@ -18,8 +19,10 @@ user_router = APIRouter(prefix="", tags=["user"])
 
 
 @user_router.post("/signup", description="サインアップ.", response_model=EntryUserResponse)
-async def signup(request: EntryUserRequest):
-    user_id = await entry_user_service.execute(request=request)
+async def signup(request: EntryUserRequest, background_tasks: BackgroundTasks):
+    user_id = await entry_user_service.execute(
+        request=request, background_tasks=background_tasks
+    )
     return EntryUserResponse(user_id=user_id)
 
 

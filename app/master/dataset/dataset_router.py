@@ -89,9 +89,11 @@ def download_proposal_thumbnail(
 async def purchase_dataset(
     dataset_id: str,
     request: PurchaseDatasetRequest,
+    background_tasks: BackgroundTasks,
 ):
     dataset_id = await purchase_dataset_service.execute(
         dataset_id=dataset_id,
         request=request,
+        background_tasks=background_tasks,
     )
     return PurchasedDatasetResponse(dataset_id=dataset_id)
