@@ -7,6 +7,7 @@ from app.main import app
 from app.master.dataset.models.purchase_dataset import (
     PurchaseDatasetRequest,
 )
+from app.facades.web3 import reversible_ft
 
 client = TestClient(app)
 
@@ -86,12 +87,14 @@ def test_purchase_dataset(mocker):
 
 
 def test_purchase_dataset(mocker):
-    # test_entry_dataset_endpoint(mocker)
-
     test_dataset_id = "12345"
     request = PurchaseDatasetRequest(
         user_id="sample_user_id",
     )
+
+    # テスト用のウォレットアドレスの現在の残高を確認
+    sample_user_wallet_address = "0xb872960EF2cBDecFdC64115E1C77067c16f042FB"
+    current_deposit = reversible_ft.balance_of_address(sample_user_wallet_address)
 
     # Send a POST request to the API endpoint
     response = client.post(f"/dataset/{test_dataset_id}/purchased", data=request.json())
@@ -99,3 +102,7 @@ def test_purchase_dataset(mocker):
     # Assert that the response status code is 200
     assert response.status_code == 200
     assert response.json()["dataset_id"] == test_dataset_id
+
+    # テスト用のウォレットアドレスの残高が減っていることを確認
+    now_deposit = reversible_ft.balance_of_address(sample_user_wallet_address)
+    assert now_deposit < current_deposit
