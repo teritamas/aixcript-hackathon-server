@@ -6,22 +6,23 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ReversibleFT is ERC20, Ownable {
-    // デポジットとして入金する額: 1token = 1千円として50,000千円入金する
     uint256 private constant depositAmmount = 50 * 1000;
-
-    constructor() ERC20("ReversibleFT", "ISFT") {
-        mint(msg.sender, depositAmmount);
-    }
 
     /**
      * URI設定時に誰がどのtokenIdに何のURIを設定したか記録する
      */
+
     event TokenMint(address indexed sender, uint256 indexed ammount);
+
+    constructor() ERC20("ReversibleFT", "RVSFT") {
+        // はじめにオーナーにトークンを発行する
+        mint(msg.sender, depositAmmount);
+    }
 
     /**
      * 指定したアドレスにトークンを発行
      */
-    function mint(address senderAddress, uint256 amount) private {
+    function mint(address senderAddress, uint256 amount) private onlyOwner {
         _mint(senderAddress, amount);
         emit TokenMint(senderAddress, amount);
     }
@@ -34,17 +35,24 @@ contract ReversibleFT is ERC20, Ownable {
     }
 
     /**
-     * オーナーににトークンを発行
+     * 売買の仲介
      */
-    function mintDeposit() public onlyOwner {
-        mint(owner(), depositAmmount);
+    function brokerage(address from, address to, uint256 amount) public onlyOwner {
+        _burn(from, amount);
+
+        // プラットフォーム運営者の報酬分
+        uint256 revenue = amount * 10 / 100;
+        mint(msg.sender, revenue);
+
+        // 販売者に還元
+        mint(to, amount - revenue);
     }
 
     /**
      * @dev
-     * デポジットされているトークン量を取得
+     * テスト用に指定したアドレスにトークンを発行
      */
-    function balanceOfDeposit() public view virtual returns (uint256) {
-        return balanceOf(owner());
+    function mintDeposit(address targetAddress) public {
+        mint(targetAddress, depositAmmount);
     }
 }
