@@ -28,4 +28,3 @@ def execute(content: bytes) -> WebDetectionDto:
 #     content = image_file.read()
 
 # print(execute(content))
-
