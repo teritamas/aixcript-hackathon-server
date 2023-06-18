@@ -22,6 +22,9 @@ class User(BaseModel):
     # ウォレットアドレス
     wallet_address: str = Field("", description="ウォレットアドレス")
 
+    # 保有トークン量
+    deposit: int = Field(-1, description="保有トークン量(-1の時は取得失敗)")
+
     # 購入したデータセット一覧
     purchase_datasets: List[UserDataset] = Field([], description="購入したデータセット一覧")
     # 販売したデータセット一覧

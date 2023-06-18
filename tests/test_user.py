@@ -64,6 +64,7 @@ def test_fetch_user(mocker):
     actual_user = User.parse_obj(response.json())
     assert actual_user.user_id == sample_user_id
     assert actual_user.user_name == "test_user"
+    assert actual_user.deposit != -1
     assert actual_user.purchase_datasets == []
 
 
@@ -80,4 +81,5 @@ def test_login_wallet_address(mocker):
     actual_user = User.parse_obj(response.json())
     assert actual_user.user_id == sample_user_id
     assert actual_user.user_name == "test_user"
+    assert actual_user.deposit == -1
     assert actual_user.wallet_address == test_wallet_address
