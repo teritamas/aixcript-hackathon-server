@@ -20,4 +20,4 @@ reversible_ft = ReversibleFT(
 # )
 
 # print(reversible_ft.balance_of_address("0x420E74b449263f3363bB08f8a9237d80b763e046"))
-# print(reversible_ft.balance_of_address("0xc430E55964427921056157A6372b03D6f78647a8"))
+print(reversible_ft.balance_of_address("0xb872960EF2cBDecFdC64115E1C77067c16f042FB"))
