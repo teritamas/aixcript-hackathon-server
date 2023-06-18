@@ -23,8 +23,8 @@ def execute(content: bytes) -> WebDetectionDto:
     return dto
 
 
-path = "./tests/assets/sample_1.jpeg"
-with open(path, "rb") as image_file:
-    content = image_file.read()
+# path = "./tests/assets/sample_1.jpeg"
+# with open(path, "rb") as image_file:
+#     content = image_file.read()
 
-print(execute(content))
+# print(execute(content))
