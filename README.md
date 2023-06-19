@@ -6,6 +6,8 @@ LIT ART MARKET のバックエンドサーバーです。本アプリケーシ�
 
 本アプリケーションについては下記の URL を参照してください
 
+- [Lit Art Market | AKINDO](https://app.akindo.io/communities/1PLX1jmpPUz2nZJL/products/peRXkK3QziGV6AmJ)
+
 ## 全体像
 
 LIT ART MARKET は下記のような構成になっています。
