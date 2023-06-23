@@ -1,3 +1,6 @@
+🎗 2023年/AI x Cripto Hackathon Top30 Product 選出
+- [参考](https://docs.google.com/spreadsheets/d/1ftUsPOCXQOBegM4b-rdlADiXoxt-gGXbAkwy0J50sJA/edit#gid=130562828)
+
 # LIT ART MARKET
 
 LIT ART MARKET のバックエンドサーバーです。本アプリケーションには、下記の URL からアクセスしてください
