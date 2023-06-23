@@ -17,7 +17,7 @@ LIT ART MARKET は下記のような構成になっています。
 上記の全体構成のうち、フロントエンド以外は本リポジトリの担当範囲です。  
 フロントエンドは、下記のリポジトリで構築されています。
 
-- [GitHub - teritamas/innovation-support-frontend](https://github.com/teritamas/innovation-support-frontend)
+- [GitHub - teritamas/lit-art-market-frontend](https://github.com/teritamas/lit-art-market-frontend)
 
 ## 概要
 
