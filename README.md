@@ -1,4 +1,5 @@
-🎗 2023年/AI x Cripto Hackathon Top30 Product 選出
+🎗 2023 年/AI x Cripto Hackathon Top30 Product 選出
+
 - [参考](https://docs.google.com/spreadsheets/d/1ftUsPOCXQOBegM4b-rdlADiXoxt-gGXbAkwy0J50sJA/edit#gid=130562828)
 
 # LIT ART MARKET
@@ -22,6 +23,18 @@ LIT ART MARKET は下記のような構成になっています。
 
 - [GitHub - teritamas/lit-art-market-frontend](https://github.com/teritamas/lit-art-market-frontend)
 
+### スマートコントラクト
+
+上記の検証環境で利用しているコントラクトは、Aster または Oasys のテストネット上にデプロイされているコントラクトを利用している。
+
+2023/07/11 までは Aster にデプロイされたコントラクトを利用している。
+
+- [Aster(Shibuya)にデプロイされたコントラクトのブロックエクスプローラー](https://blockscout.com/shibuya/address/0xBDC9D28691F277b412c0f86faCd3290e4649413D)
+
+2023/07/11 以降は Oasys にデプロイされたコントラクトを利用している。
+
+- [Oasys(Test hub Layer)にデプロイされたコントラクトのブロックエクスプローラー](https://scan.testnet.oasys.games/address/0x8233d664582749F4c1168169028bBE33E16e3814)
+
 ## 概要
 
 本リポジトリで構築される API エンドポイントと、その API の SwaggerDocs は下記の通りです。
@@ -33,7 +46,7 @@ LIT ART MARKET は下記のような構成になっています。
 
 ### 1. 前準備
 
-はじめに.env.sampleを参考に、本プロジェクト直下に.envのファイルを作成する。`REVERSIBLE_FT_CONTRACT_ADDRESS`は、次の手順でコントラクトをデプロイしたのちに記入するので、現時点では空欄にしておく。
+はじめに.env.sample を参考に、本プロジェクト直下に.env のファイルを作成する。`REVERSIBLE_FT_CONTRACT_ADDRESS`は、次の手順でコントラクトをデプロイしたのちに記入するので、現時点では空欄にしておく。
 
 本番のネットワークにデプロイする場合は、`PROVIDER_NETWORK`, `REVERSIBLE_FT_CONTRACT_ADDRESS`をデプロイしたネットワークに合わせて変更する。
 
@@ -89,7 +102,7 @@ anvil -m $MNEMONIC
 
 ```sh:
 source .env
-forge script Deploy --broadcast --rpc-url $FOUNDRY 
+forge script Deploy --broadcast --rpc-url $FOUNDRY
 
 ~~省略~~
 
@@ -106,16 +119,33 @@ Paid: 0.006154056 ETH (1538514 gas * 4 gwei)
 
 実行後、ログの`Contract Address`に記載しているアドレスを`.env`の`REVERSIBLE_FT_CONTRACT_ADDRESS`に記載する。
 
-### Asterのテストネットにデプロイする場合
+#### Aster のテストネットにデプロイする場合
 
-AsterのテストネットであるSibuyaにデプロイする場合は、下記のコマンドでデプロイする。
+Aster のテストネットである Sibuya にデプロイする場合は、下記のコマンドでデプロイする。
 
 ```sh:
-forge script Deploy --broadcast --rpc-url $SIBUYA 
+forge script Deploy --broadcast --rpc-url $SIBUYA
 ```
 
 デプロイの際にはテストネットのウォレットに十分な残高があるかを確認する
 
+-
+
+#### Oasys のテストネットにデプロイする場合
+
+Oasys のテストネットでにデプロイする場合は、下記のコマンドでデプロイする。
+
+```sh:
+forge script Deploy --broadcast --rpc-url $SIBUYA
+```
+
+デプロイの際にはテストネットのウォレットに十分な残高があるかを確認する
+
+#### ABI.json のファイル名更新
+
+デプロイ後、`0x....`に続くコントラクトアドレスが発行される。コントラクトアドレスをコピーし、`app/assets/abi/0x....json`のファイル名を`${コピーしたコントラクトアドレス}.json`に変更する。
+
+現時点では、Oasys のテストネットにデモ用に デプロイされているコントラクトアドレス名を利用している。
 
 ### 3. サーバーの起動
 
